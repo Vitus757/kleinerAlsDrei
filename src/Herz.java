@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.awt.*;
 
 public class Herz extends JFrame{
 
@@ -14,6 +15,18 @@ public class Herz extends JFrame{
 
         frame.setSize(breite, höhe);
         frame.setLayout(null);
+
+        Image icon = new ImageIcon(
+        getClass().getResource("/Bild.jpg")
+        ).getImage();
+
+        if (Taskbar.isTaskbarSupported()) {
+            Taskbar.getTaskbar().setIconImage(icon);
+        }
+
+        setIconImage(icon);
+
+
         frame.setVisible(true);
 
         Timer timer = new Timer();
@@ -36,23 +49,6 @@ public class Herz extends JFrame{
         };
 
         timer.scheduleAtFixedRate(task, 200,300);
-        
-        /*
-        for(int i = 0; i < 500; i++)
-        {
-            JLabel feld = new JLabel("<3");
-            feld.setSize(60,30);
-            frame.add(feld);
-            double x = Math.random() * (1.72 - (-1.72)) + (-1.72); //Math.random() * (max - min) + min;
-            double y = heartMethode(x);
-            x *= 100;
-            x += 220;
-            y *= -100;
-            y += 250;
-            feld.setLocation((int) x, (int) y);
-            feld.setVisible(true);
-        }
-            */
     }
 
     private double heartMethode(double x) {
