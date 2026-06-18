@@ -1,20 +1,46 @@
 import javax.swing.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Herz extends JFrame{
 
+    public JFrame frame;
+
     public Herz() {
-        JFrame frame = new JFrame("<3");
+        frame = new JFrame("<3");
 
         int breite = 500;
         int höhe = 500;
 
-        //h/b anpassen!!!!!!!!!!!!!!!!!
         frame.setSize(breite, höhe);
         frame.setLayout(null);
         frame.setVisible(true);
-        for(int i = 0; i < 600; i++)
+
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+
+            public void run() {
+            JLabel feld = new JLabel("<3");
+            feld.setSize(60,30);
+            frame.add(feld);
+            double x = Math.random() * (1.72 - (-1.72)) + (-1.72); //Math.random() * (max - min) + min;
+            double y = heartMethode(x);
+            x *= 100;
+            x += 220;
+            y *= -100;
+            y += 250;
+            feld.setLocation((int) x, (int) y);
+            feld.setVisible(true);
+            }
+        };
+
+        timer.scheduleAtFixedRate(task, 200,300);
+        
+        /*
+        for(int i = 0; i < 500; i++)
         {
-            JLabel feld = new JLabel("Alissa <3");
+            JLabel feld = new JLabel("<3");
             feld.setSize(60,30);
             frame.add(feld);
             double x = Math.random() * (1.72 - (-1.72)) + (-1.72); //Math.random() * (max - min) + min;
@@ -26,6 +52,7 @@ public class Herz extends JFrame{
             feld.setLocation((int) x, (int) y);
             feld.setVisible(true);
         }
+            */
     }
 
     private double heartMethode(double x) {
